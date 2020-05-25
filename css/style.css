@@ -1,0 +1,14 @@
+*{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;   
+}
+
+.crypto-list{
+    margin-top: 20px;
+}
+.crypto-img{
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
