@@ -1,3 +1,4 @@
+let cryptoTableBody = document.querySelector('.crypto-tbody');
 const cryptoLink = 'https://min-api.cryptocompare.com/data/top/totalvolfull?limit=10&tsym=USD';
 
 function getData(link, callback){
@@ -10,8 +11,26 @@ function getData(link, callback){
     }
     xhr.send();
 }
+getData(cryptoLink, renderLine);
 
-getData(cryptoLink, data =>{
-    console.log(data);
-});
+function renderLine(data){
+    let line = ``;
+    
+    for(let i = 0; i<data.length; i++){
+        line += `
+            <tr>
+                <th scope="row">${i+1}</th>
+                <td>${data[i].CoinInfo.Name}</td>
+                <td>${data[i].CoinInfo.FullName}</td>
+                <td>${data[i].DISPLAY.USD.PRICE}</td>
+                <td>${(data[i].DISPLAY.USD.MKTCAP)}</td>
+            </tr>
+        `;
+    
+    }
+    cryptoTableBody.innerHTML = line;
+    console.log(data[0]);
+}
+
+
 
