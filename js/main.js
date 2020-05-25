@@ -17,12 +17,16 @@ getData(cryptoLink, renderLine);
 function renderLine(data){
     let line = ``;
     for(let i = 0; i<data.length; i++){
+        const inputVal = document.getElementsByName("${data[i].CoinInfo.Name}")[0].value;
         line += `
             <tr>
                 <th scope="row">${i+1}</th>
                 <td><img src="${imgUrl + data[i].CoinInfo.ImageUrl}" class="text-left crypto-img"/>${data[i].CoinInfo.Name}</td>
                 <td>${data[i].CoinInfo.FullName}</td>
-                <td>${data[i].DISPLAY.USD.PRICE}</td>
+                <td class="${(inputVal !== ${data[i].DISPLAY.USD.PRICE} && inputVal < ${data[i].DISPLAY.USD.PRICE}) ? `green` : `red`}">
+                    ${if(inputVal !== ${data[i].DISPLAY.USD.PRICE}) data[i].DISPLAY.USD.PRICE else inputVal}
+                    <input type="hidden" name="${data[i].CoinInfo.Name}" value="${if(inputVal !== ${data[i].DISPLAY.USD.PRICE}) data[i].DISPLAY.USD.PRICE else inputVal}" />
+                </td>
                 <td>${(data[i].DISPLAY.USD.MKTCAP)}</td>
             </tr>
         `;
